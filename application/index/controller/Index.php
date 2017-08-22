@@ -14,7 +14,8 @@ class Index extends Controller
 
     public function index()
     {
-        $this->assign('script','111111');
+        $this->assign('script', '111111');
+        $this->assign('title', 'blog');
         return view();
     }
 
