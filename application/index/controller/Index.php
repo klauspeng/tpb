@@ -10,7 +10,6 @@ class Index extends Controller
     // 控制器初始化
     public function _initialize()
     {
-        echo '控制器初始化';
     }
 
     public function index()
