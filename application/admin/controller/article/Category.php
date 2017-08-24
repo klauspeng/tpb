@@ -20,8 +20,25 @@ class Category extends Admin
     }
 
 
+    /**
+     * 增加分类
+     */
     public function add()
     {
+        $request = request();
+        url();
+
+        // 显示增加页面
+        if ($request->isGet())
+        {
+            return view();
+        }
+
+        // 增加分类
+        if ($request->isAjax() && $request->isPost())
+        {
+
+        }
 
     }
 }
