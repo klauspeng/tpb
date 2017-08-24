@@ -14,13 +14,10 @@ class Index extends Controller
 
     public function index()
     {
+        dump(config('view_replace_str'));
         $this->assign('script', '111111');
         $this->assign('title', 'blog');
         return view();
     }
 
-    public function test()
-    {
-        return view('test');
-    }
 }
