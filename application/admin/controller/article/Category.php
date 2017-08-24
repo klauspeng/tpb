@@ -12,7 +12,16 @@ class Category extends Admin
      */
     public function index()
     {
-        $result = Db::name('article_type')->where('id',2)->find();
-        dump($result);
+        $categorys = Db::name('article_type')->select();
+        // $categorys && $categorys = make_tree($categorys);
+
+        $this->assign('categorys', $categorys);
+        return view();
+    }
+
+
+    public function add()
+    {
+
     }
 }
