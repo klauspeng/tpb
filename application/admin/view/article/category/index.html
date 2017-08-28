@@ -21,6 +21,7 @@
                             <th>父级ID</th>
                             <th>名称</th>
                             <th>添加时间</th>
+                            <th>操作</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -30,6 +31,10 @@
                             <td>{$category.pid}</td>
                             <td>{$category.name}</td>
                             <td>{$category.add_time}</td>
+                            <td>
+                                <a type="button" class="btn btn-primary">修改</a>
+                                <a href="{:url('@admin/article/category/del')}?id={$category.id}" type="button" class="btn btn-danger">删除</a>
+                            </td>
                         </tr>
                         {/foreach}
                         </tbody>
