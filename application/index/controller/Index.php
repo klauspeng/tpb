@@ -15,8 +15,6 @@ class Index extends Controller
 
     public function index()
     {
-
-        $this->assign('article',$article);
         return view();
     }
 

@@ -17,9 +17,10 @@ class Article extends Controller
     {
         $id = input('id',1,'\intval');
         $article = Db::name('article')->find($id);
-
         $content = file_get_contents($article['raw']);
-        $this->assign('content',$content);
+        $Parsedown = new \Parsedown();
+        $html = $Parsedown->text($content);
+        $this->assign('content',$html);
         return view();
     }
 
