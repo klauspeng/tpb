@@ -4,6 +4,7 @@ namespace app\index\controller;
 
 use think\Controller;
 
+
 class Index extends Controller
 {
 
@@ -14,9 +15,8 @@ class Index extends Controller
 
     public function index()
     {
-        dump(config('view_replace_str'));
-        $this->assign('script', '111111');
-        $this->assign('title', 'blog');
+
+        $this->assign('article',$article);
         return view();
     }
 
