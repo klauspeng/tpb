@@ -145,17 +145,17 @@ function factor(opts ,count,current) {
     	// 设置锚点id
 		$(header_obj).attr('id',anchor);
 
-		// log($(header_obj).text());
+		log($(header_obj).text());
 
 		opts._header_offsets.push($(header_obj).offset().top - opts.highlight_offset);
 
-		// log('h offset ='+( $(header_obj).offset().top - opts.highlight_offset ) );
+		log('h offset ='+( $(header_obj).offset().top - opts.highlight_offset ) );
 
 		var title = $(header_obj).text();
 
-		if ($(header_obj).text().length > 20)
+		if (get_length($(header_obj).text()) > 16)
 		{
-            title = title.substr(0, 18) + '...';
+            title = cut_str(title,14) + '...';
 		}
 
 		opts._header_nodes.push({
