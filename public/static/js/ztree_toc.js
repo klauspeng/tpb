@@ -59,7 +59,7 @@ function factor(opts ,count,current) {
 	 */
 	function create_toc(opts) {
 		$(opts.documment_selector).find(':header').each(function() {
-			var level = parseInt(this.nodeName.substring(1), 10);
+			var level = parseInt(this.nodeName.substring(1), 10) -1;
 
 			_rename_header_content(opts,this,level);
 
@@ -141,20 +141,27 @@ function factor(opts ,count,current) {
 		if(opts.use_head_anchor == true){
 			anchor = _get_anchor_from_head(header_obj);
 		}
-		
-    // 设置锚点id
+
+    	// 设置锚点id
 		$(header_obj).attr('id',anchor);
 
-		log($(header_obj).text());
+		// log($(header_obj).text());
 
 		opts._header_offsets.push($(header_obj).offset().top - opts.highlight_offset);
 
-		log('h offset ='+( $(header_obj).offset().top - opts.highlight_offset ) );
+		// log('h offset ='+( $(header_obj).offset().top - opts.highlight_offset ) );
+
+		var title = $(header_obj).text();
+
+		if ($(header_obj).text().length > 20)
+		{
+            title = title.substr(0, 18) + '...';
+		}
 
 		opts._header_nodes.push({
 			id:id,
 			pId:pid ,
-			name:$(header_obj).text()||'null',
+			name:title || null,
 			open:true,
 			url:'#'+ anchor,
 			target:'_self'
@@ -174,12 +181,12 @@ function factor(opts ,count,current) {
 			timeout = setTimeout(function() {
 				var top = $(opts.scroll_selector).scrollTop(),highlighted;
 
-				if(opts.debug) console.log('top='+top);
+				if(opts.debug) log('top='+top);
 
 				for (var i = 0, c = opts._header_offsets.length; i < c; i++) {
 					// fixed: top+5防止点击ztree的时候，出现向上抖动的情况
 					if (opts._header_offsets[i] >= (top + 5) ) {
-						console.log('opts._header_offsets['+ i +'] = '+opts._header_offsets[i]);
+						log('opts._header_offsets['+ i +'] = '+opts._header_offsets[i]);
 						$('a').removeClass('curSelectedNode');
 
 						// 由于有root节点，所以i应该从1开始
@@ -207,7 +214,7 @@ function factor(opts ,count,current) {
 	 * 日志
 	 */
 	function log(str) {
-		return;
+		// return;
 		if($.fn.ztree_toc.defaults.debug == true) {
 			console.log(str);
 		}
@@ -233,23 +240,23 @@ function factor(opts ,count,current) {
 		    bind_scroll_event_and_update_postion(opts);
 		});
 		// each end
-	}
+	};
 
 	//定义默认
 	$.fn.ztree_toc.defaults = {
 		_zTree: null,
 		_headers: [],
 		_header_offsets: [],
-		_header_nodes: [{ id:1, pId:0, name:"Table of Content",open:true}],
-		debug: true,
+		_header_nodes: [],
+		debug: false,
 		/*
 		 * 使用标题作为anchor
 		 * create table with head for anchor for example: <h2 id="#Linux基础">Linux基础</h2>
 		 * 如果标题是唯一的，建议开启此选项，如果标题不唯一，还是使用数字吧
 		 * 此选项默认是false，不开启
 		 */
-		use_head_anchor: false,
-    scroll_selector: 'window',
+		use_head_anchor: true,
+    	scroll_selector: 'window',
 		highlight_offset: 0,
 		highlight_on_scroll: true,
 		/*
