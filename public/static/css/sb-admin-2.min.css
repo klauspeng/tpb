@@ -24,9 +24,9 @@ body {
 @media (min-width: 768px) {
     #page-wrapper {
         position: inherit;
-        margin: 0 0 0 260px;
+        margin: 0 10%;
         padding: 0 30px;
-        border-left: 1px solid #e7e7e7
+        border-left: 1px solid #e7e7e7;
     }
 }
 
@@ -499,9 +499,8 @@ table.dataTable thead .sorting:after {
         border-left-width: 0
     }
 }
-
-.ztree li {
-    line-height: 25px;
+/*导航栏*/
+nav .container-fluid{
+    margin: 0 10%;
 }
-.ztree li a.curSelectedNode{height: 25px;}
-#tree{height: 100%;}
+

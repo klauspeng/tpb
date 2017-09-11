@@ -7,21 +7,68 @@
 <script src="//cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
 <script>hljs.initHighlightingOnLoad();</script>
 
-<script src="//cdn.bootcss.com/zTree.v3/3.5.29/js/jquery.ztree.core.min.js"></script>
-<script src="__JS__/ztree_toc.js"></script>
-
 <SCRIPT type="text/javascript" >
-    <!--
-    $(document).ready(function(){
-        $('#tree').ztree_toc({
-            is_auto_number: true,
-        });
-    });
-    //-->
     $("#pin").pin({
         containerSelector: "#page-wrapper",
-        minWidth: 940,
-    })
+        minWidth: 940
+    });
+    // 文章内容
+    target = $("#contents");
+    //    目录
+    var catalogue = $("#pin");
+    $(document).ready(function() {
+        GenerateContents2();
+    });
+
+    function GenerateContents2() {
+        var num = 0;
+        var target = $("#contents");
+        var content = "目录";
+        content += "<ul>";
+        $("h2").each(function(){
+            content += "<li>"+GenerateA(num,$(this).text());
+            $(this).before(GenerateLabel(num));
+            num++;
+
+            var second = $(this).nextUntil("h2","h3");
+            if (second) {
+                content += "<ul>";
+                second.each(function(){
+                        content += "<li>"+GenerateA
+                            (num,$(this).text())+"</li>";
+                        $(this).before(GenerateLabel(num));
+                        num++;
+                    }
+                );
+                content += "</ul>";
+            };
+            content += "</li>";
+        });
+        content += "</ul>";
+        catalogue.append(content);
+    }
+
+    //这两个函数本来想的是以后改着方便
+    function GenerateLabel(num){
+        var a = "<a name = 'label" + num + "'></a>";
+        return a;
+    }
+
+    function GenerateA(num ,text){
+        var ss = "<a href='javascript:;' data-label='" + "label"
+            + num +"'>" + text
+            + "</a>";
+        return ss;
+    }
+
+    // 点击跳转
+    $(document).ready(function() {
+        $('.pin-wrapper a').click(function(){
+            var label = $(this).attr('data-label');
+            var scrollT = $('[name='+label+']').offset().top-60;
+            $('body').scrollTop(scrollT);
+        });
+    });
 </SCRIPT>
 
 <!--引入js-->
