@@ -23,7 +23,7 @@
     function GenerateContents2() {
         var num = 0;
         var target = $("#contents");
-        var content = "目录";
+        var content = "<div class='panel-heading'>目录</div>";
         content += "<ul>";
         $("h2").each(function(){
             content += "<li>"+GenerateA(num,$(this).text());
