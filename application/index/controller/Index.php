@@ -2,7 +2,9 @@
 
 namespace app\index\controller;
 
+use think\Cache;
 use think\Controller;
+use think\Session;
 
 
 class Index extends Controller
@@ -15,7 +17,13 @@ class Index extends Controller
 
     public function index()
     {
-        return view();
+        Session::set('name','lp');
+        echo Session::get('name');
+        // return view();
+
+        // 赋值think作用域
+        session('name', 'thinkphp', 'think');
+
     }
 
 }
